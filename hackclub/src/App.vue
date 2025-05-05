@@ -1,47 +1,48 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+
+import {ref,computed, reactive} from 'vue'
+import Footer from './Footer.vue';
+const input = ref('');
+const bools = computed(() => {
+  return input.value!="" ? true : false
+})
+const list = ref([['',"Username"],['',"Password"]])
+const faza = ref(0);
+const lol = ref(true)
+function gh(){
+  if(faza.value==list.value.length){
+    lol.value=false;
+  }else{
+  if(bools){
+    list.value[faza.value][0] = input.value;
+    faza.value++;
+    input.value = "";
+  }
+}
+}
+function anim(){
+
+}
+/*setInterval(function(){
+ 
+
+},500)*/
+
 </script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+ <div class="center">
+  <div class="rcenter">
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <form action="" @submit.prevent="gh" v-if="lol">
+    
+    <div class="input"><input type="text" v-model="input" :class="{ac:bools}">
+      <span class="title">{{ list[faza][1] }}</span></div>
+    <button><span>Next</span></button>
+  </form>
+  <div v-else class="sup">
+    You are done now go check gmail and verify you self!
+  </div>
+  </div>
+ </div>
+ <Footer></Footer>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
